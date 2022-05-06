@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作業09</title>
+    <style>
+        h4 {
+        color: orange;
+        }
+        lable{
+        color:skyblue;
+        }
+        input{
+        color:red;
+        }
+        div {
+        color: purple;
+        margin: 5px;
+        }
+        table {
+		    width:90%;
+		    border-color:dodgerblue;
+		    border-style:solid;
+		    border-collapse: collapse;
+		}
+		   tr {
+		   text-align:center;
+		   border-color:dodgerblue;
+		   border-style:solid;
+		   }
+		   td{
+		   vertical-align: middle;
+		   border-color: dodgerblue;
+		   border-style: solid;
+		   }
+           td:nth-child(1){
+           color:brown;
+           }
+    </style>
+
+</head>
+
+<body>
+<form id="form01">
+    <label>姓名:</label>
+    <input type="text" name="name01" value="莊詠卉"><br>
+    <label>收件住址:</label>
+    <input type="text" name="address01" value="新北市中和區秀朗路三段12號"><br>
+    <label>電話:</label>
+    <input type="tel" name="tel01" value="0910625280"><br>
+    <label>電子郵件:</label>
+    <input type="email" name="email01" value="u10905129@ms.ttu.edu.tw"><br>
+    <label>指定送貨日期:</label>
+    <input type="date" name="date01"><br>
+    <label>蛋糕種類:(四選一)</label><br>
+    <input type="radio" name="cake" id="cake01" value="提拉米蘇(八吋)">提拉米蘇(八吋)260元<br>
+    <input type="radio" name="cake" id="cake02" value="黑森林蛋糕(八吋)">黑森林蛋糕(八吋)340元<br>
+    <input type="radio" name="cake" id="cake03" value="重乳酪蛋糕(八吋)">重乳酪蛋糕(八吋)580元<br>
+    <input type="radio" name="cake" id="cake04" value="蜂蜜檸檬生乳酪塔(八吋)">蜂蜜檸檬生乳酪塔(八吋)320元<br>
+</form>
+<br>
+<button onclick="shoppingInfo()"><h4>結帳</h4></button>
+<div id="demo"></div>
+<script>
+   function shoppingInfo(){
+   const x = document.getElementById("form01");
+   var item ="";
+   var price = 0;
+   var text = "<h4>您的購買資訊如下:</h4>";
+   var i;
+   text += "<table>";
+   for(i = 0; i < 5; i++){
+   switch(i){
+   case 0:
+   item = "姓名: ";
+   break;
+   case 1:
+   item = "收件住址: ";
+   break;
+   case 2:
+   item = "電話: ";
+   break;
+   case 3:
+   item = "電子郵件: ";
+   break;
+   case 4:
+   item = "指定送貨日期: ";
+   break;
+   }
+   text += "<tr><td>" + item + "</td>"+"<td>"+ x.elements[i].value + "</td></tr>"+"<br>";
+   }
+   for(i=5;i<=8; i++){
+   if (x.elements[i].checked==true){
+   switch(i){
+   case 5:
+   price = 260;
+   break;
+   case 6:
+   price = 340;
+   break;
+   case 7:
+   price = 580;
+   break;
+   case 8:
+   price = 320;
+   break;
+   }
+   text +="<tr><td>" + "蛋糕種類:" + "</td>"+"<td>"+ x.elements[i].value+"</td></tr>"+"<br>";
+   text +="<tr><td>" + "價格合計:" + "</td>"+"<td>"+ price+"元"+"</td></tr>"+"<br>";
+   text += "</table>";
+   }
+   }
+   document.getElementById("demo").innerHTML=text;
+   }
+</script>
+
+</body>
+
+</html>
