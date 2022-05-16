@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作業11</title>
+    <style>
+        h4 {
+        color: orange;
+        }
+        div{
+        color:purple;
+        margin:5px;
+        }
+    </style>
+</head>
+
+<body>
+<form id="form01">
+    姓名:<input type="text" name="number01" value="莊詠卉"><br>
+    收件住址:<input type="text" name="address01" value="新北市中和區秀朗路三段12號"><br>
+    電話:<input type="tel" name="tel01" value="0910625280"><br>
+    電子郵件:<input type="email" name="email01" value="u10905129@ms.ttu.edu.tw"><br>
+    指定送貨日期:<input type="date" name="date01"><br>
+    蛋糕種類:<br><input type="checkbox" name="cake" id="cake01" value="提拉米蘇(八吋)">提拉米蘇(八吋)260元;
+    購買數量:<input type="number" name="number01"><br>
+    <input type="checkbox" name="cake" id="cake02" value="黑森林蛋糕(八吋)">黑森林蛋糕(八吋)340元;
+    購買數量:<input type="number" name="number02"><br>
+    <input type="checkbox" name="cake" id="cake03" value="重乳酪蛋糕(八吋)">重乳酪蛋糕(八吋)580元;
+    購買數量:<input type="number" name="number03"><br>
+</form>
+
+<button onclick="shoppingInfo()"><h4>結帳</h4></button>
+<div id="demo"></div>
+
+<script>
+   var text = "<h4>您的購買資訊如下:</h4>";
+   var cake = function (cakeType,cakePrice,no){
+       this.Type = cakeType;
+       this.Price = cakePrice;
+       this.subTotal = function(no){
+           text += "蛋糕種類: " + this.Type + "; 共" + no + "單位<br>";
+           text += "價格小計: " + this.Price * no + "元<br>";
+       };
+   };
+   var cake01 = new cake("提拉米蘇(八吋)",260, 0);
+   var cake02 = new cake("黑森林蛋糕(八吋)",340, 0);
+   var cake03 = new cake("重乳酪蛋糕(八吋)",580, 0);
+
+function shoppingInfo(){
+   var x = document.getElementById("form01");
+   var item = "";
+   var sumToPay = 0;
+   var i;
+   for(i = 0; i < 5; i++){
+      switch(i){
+          case 0: item = "姓名: "; break;
+          case 1: item = "收件住址: "; break;
+          case 2: item = "電話: "; break;
+          case 3: item = "電子郵件: "; break;
+          case 4: item = "指定送貨日期: "; break;
+      }
+      text += item + x.elements[i].value + "<br>";
+   }
+   for(i=5;i<=9; i++){
+      if (x.elements[i].checked === true){
+           switch(i){
+               case 5:cake01.no = x.elements[i+1].value;
+               sumToPay += cake01.Price * cake01.no;
+               cake01.subTotal(cake01.no);
+               break;
+               case 7:cake02.no = x.elements[i+1].value;
+               sumToPay += cake02.Price * cake02.no;
+               cake02.subTotal(cake02.no);
+               break;
+               case 9:cake03.no = x.elements[i+1].value;
+               sumToPay += cake03.Price * cake03.no;
+               cake03.subTotal(cake03.no);
+               break;
+           }
+      }
+   }
+      text += "價格合計:" + sumToPay + "元<br>";
+      document.getElementById("demo").innerHTML = text;
+   }
+</script>
+</body>
+</html>
